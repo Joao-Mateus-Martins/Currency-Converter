@@ -1,13 +1,43 @@
-<h1>Conversor de Moedas 🪙</h1>
+# 🪙 Currency Converter
 
-<h2>Linguagens utilizadas 💡</h2>
+A web application for converting currencies, built with JavaScript and integrated with an external API to fetch up-to-date exchange rate data.
 
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![Css](https://img.shields.io/badge/CSS-663399.svg?style=for-the-badge&logo=CSS&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+## 🌐 Live Demo
 
-<img width="1912" height="901" alt="Captura de tela 2025-07-28 233508" src="https://github.com/user-attachments/assets/b7fde80f-e5c4-409d-8b27-a8836b3bb3d9" />
+[View Live Demo](https://conversor-de-moedas-bay.vercel.app/)
 
-  <h2>⬇️Abra o site na pagina aqui </h2> 
-  
-<a href=https://joao-mateus-martins.github.io/Conversor-de-moedas/>![Google](https://img.shields.io/badge/google-4285F4?style=for-the-badge&logo=google&logoColor=white)</a>
+## ✨ Features
+
+- 💱 Real-time currency conversion
+- 🔗 Integration with an exchange rate API
+- 📱 Responsive layout
+
+## 🛠️ Technologies
+
+- HTML5
+- CSS3
+- JavaScript
+- Fetch API
+
+## 📂 Project Structure
+
+```
+Currency-converter/
+├── src/
+└── README.md
+```
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/Joao-Mateus-Martins/Currency-converter.git
+cd Currency-converter
+```
+
+Then open the project's HTML file directly in your browser.
+
+## 👨‍💻 Developer
+
+**João Mateus** — Web Developer
+
+- GitHub: [@Joao-Mateus-Martins](https://github.com/Joao-Mateus-Martins)
