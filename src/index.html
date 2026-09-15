@@ -2,90 +2,245 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="stylesheet" href="stiles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/fundo23.png">
-    <title>conversor de moedas</title>
+    <title>Currency Converter — Conversor de Moedas</title>
+    <meta name="description" content="Converta moedas em tempo real, acompanhe cotações, gráficos e histórico em uma plataforma financeira moderna.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💱</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="Styles.css">
 </head>
 
-<body>
-    <div class="container">
-        <h1>Conversor de Moedas</h1>
+<body data-theme="dark">
 
-        <form class="converter-form" id="converterForm">
-
-            <div class="currency-row">
-
-                <div class="currency-input">
-                    <label for="amount">Valor</label>
-                    <input type="number" id="amount" placeholder="Digite o valor" step="0.1" min="0" required>
-                </div>
-
-                <div class="currency-select">
-                    <label for="fromCurrency">De</label>
-                    <select id="fromCurrency" required>
-                        <option value="USD">USD - Dólar</option>
-                        <option value="EUR">EUR - Euro</option>
-                        <option value="BRL" selected>BRL - Real</option>
-                        <option value="GBP">GBP - Libra</option>
-                        <option value="JPY">JPY - Iene</option>
-                        <option value="CAD">CAD - Dólar Canadense</option>
-                        <option value="AUD">AUD - Dólar Australiano</option>
-                        <option value="CHF">CHF - Franco Suíço</option>
-                        <option value="CNY">CNY - Yuan</option>
-                        <option value="ARS">ARS - Peso Argentino</option>
-                    </select>
-                </div>
-
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path d="M4 12a8 8 0 0 1 13.5-5.8M20 12a8 8 0 0 1-13.5 5.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M17.5 4.5v3.2h-3.2M6.5 19.5v-3.2h3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="brand-name">Currency<span class="brand-accent">Converter</span></span>
             </div>
 
-            <div class="currency-row">
+            <div class="header-controls">
+                <span class="api-status" id="apiStatus" role="status" aria-live="polite">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span class="status-text">Verificando API…</span>
+                </span>
 
-                <div class="currency-input">
-                    <label for="convertedAmount">Resultado</label>
-                    <input type="text" readonly id="convertedAmount" placeholder="Valor Convertido">
-                </div>
-
-                <div class="currency-select">
-                    <label for="toCurrency">De</label>
-                    <select id="toCurrency" required>
-                        <option value="USD" selected>USD - Dólar</option>
-                        <option value="EUR">EUR - Euro</option>
-                        <option value="BRL">BRL - Real</option>
-                        <option value="GBP">GBP - Libra</option>
-                        <option value="JPY">JPY - Iene</option>
-                        <option value="CAD">CAD - Dólar Canadense</option>
-                        <option value="AUD">AUD - Dólar Australiano</option>
-                        <option value="CHF">CHF - Franco Suíço</option>
-                        <option value="CNY">CNY - Yuan</option>
-                        <option value="ARS">ARS - Peso Argentino</option>
-                    </select>
-                </div>
-
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar para modo claro" aria-pressed="false">
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
             </div>
-
-            <button type="submit" class="converter-btn" id="converterBtn">
-                💰 Converter Moeda
-            </button>
-        </form>
-
-        <div class="loading">
-            <div class="spinner"></div>
-            <p>Buscando cotação...</p>
         </div>
+    </header>
 
-        <div class="result"></div>
-        <div class="error"></div>
+    <main>
+        <section class="hero">
+            <p class="hero-eyebrow">Cotações em tempo real</p>
+            <h1>Conversão inteligente de moedas</h1>
+            <p class="hero-sub">Consulte cotações atualizadas e converta valores entre 10 moedas em segundos.</p>
+        </section>
 
+        <!-- CONVERSOR PRINCIPAL -->
+        <section class="converter-section" aria-labelledby="converter-heading">
+            <h2 class="visually-hidden" id="converter-heading">Conversor de moedas</h2>
 
-        <div class="info">
-           <p>💡 Taxas atualizadas em tempo real</p>
-        </div>
+            <form class="converter-card" id="converterForm">
 
-    </div>
+                <div class="field-group">
+                    <label for="amount">Valor a converter</label>
+                    <div class="amount-field">
+                        <span class="amount-symbol" id="fromSymbol" aria-hidden="true">R$</span>
+                        <input type="text" inputmode="decimal" id="amount" placeholder="0,00" required aria-describedby="amount-hint">
+                    </div>
+                    <p class="field-hint" id="amount-hint">Use vírgula ou ponto para casas decimais.</p>
+                </div>
 
+                <div class="currency-panels">
+                    <div class="currency-panel">
+                        <label for="fromCurrency">De</label>
+                        <div class="currency-select-wrap">
+                            <span class="currency-flag" id="fromFlag" aria-hidden="true">🇧🇷</span>
+                            <select id="fromCurrency" required aria-label="Moeda de origem">
+                                <option value="USD">USD — Dólar Americano</option>
+                                <option value="EUR">EUR — Euro</option>
+                                <option value="BRL" selected>BRL — Real Brasileiro</option>
+                                <option value="GBP">GBP — Libra Esterlina</option>
+                                <option value="JPY">JPY — Iene Japonês</option>
+                                <option value="CAD">CAD — Dólar Canadense</option>
+                                <option value="AUD">AUD — Dólar Australiano</option>
+                                <option value="CHF">CHF — Franco Suíço</option>
+                                <option value="CNY">CNY — Yuan Chinês</option>
+                                <option value="ARS">ARS — Peso Argentino</option>
+                            </select>
+                        </div>
+                        <p class="currency-name" id="fromName">Real Brasileiro</p>
+                    </div>
+
+                    <button type="button" class="swap-btn" id="swapBtn" aria-label="Inverter moedas">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M7 7h11l-3.2-3.2M17 17H6l3.2 3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                    <div class="currency-panel">
+                        <label for="toCurrency">Para</label>
+                        <div class="currency-select-wrap">
+                            <span class="currency-flag" id="toFlag" aria-hidden="true">🇺🇸</span>
+                            <select id="toCurrency" required aria-label="Moeda de destino">
+                                <option value="USD" selected>USD — Dólar Americano</option>
+                                <option value="EUR">EUR — Euro</option>
+                                <option value="BRL">BRL — Real Brasileiro</option>
+                                <option value="GBP">GBP — Libra Esterlina</option>
+                                <option value="JPY">JPY — Iene Japonês</option>
+                                <option value="CAD">CAD — Dólar Canadense</option>
+                                <option value="AUD">AUD — Dólar Australiano</option>
+                                <option value="CHF">CHF — Franco Suíço</option>
+                                <option value="CNY">CNY — Yuan Chinês</option>
+                                <option value="ARS">ARS — Peso Argentino</option>
+                            </select>
+                        </div>
+                        <p class="currency-name" id="toName">Dólar Americano</p>
+                    </div>
+                </div>
+
+                <button type="submit" class="converter-btn" id="converterBtn">
+                    <span class="btn-label">Converter moeda</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <div class="loading" id="loading" role="status" aria-live="polite">
+                    <span class="skeleton-line"></span>
+                    <span class="skeleton-line short"></span>
+                    <p>Buscando cotação atualizada…</p>
+                </div>
+
+                <div class="error" id="error" role="alert"></div>
+
+                <div class="result" id="result">
+                    <p class="result-from" id="resultFrom"></p>
+                    <span class="result-arrow" aria-hidden="true">↓</span>
+                    <p class="result-to" id="resultTo"></p>
+                    <p class="result-rate" id="resultRate"></p>
+                    <p class="result-updated" id="resultUpdated"></p>
+                </div>
+            </form>
+        </section>
+
+        <!-- MERCADO DE MOEDAS -->
+        <section class="panel" aria-labelledby="market-heading">
+            <div class="panel-heading">
+                <h2 id="market-heading">Mercado de moedas</h2>
+                <p>Principais cotações em relação ao Real, atualizadas a cada consulta.</p>
+            </div>
+            <div class="market-grid" id="marketGrid">
+                <p class="panel-placeholder">Carregando cotações…</p>
+            </div>
+        </section>
+
+        <!-- RESUMO DO MERCADO -->
+        <section class="panel" aria-labelledby="stats-heading">
+            <div class="panel-heading">
+                <h2 id="stats-heading">Resumo do mercado</h2>
+                <p>Calculado automaticamente a partir das cotações atuais.</p>
+            </div>
+            <div class="stats-grid" id="statsGrid">
+                <p class="panel-placeholder">Aguardando dados…</p>
+            </div>
+        </section>
+
+        <!-- GRÁFICO -->
+        <section class="panel" aria-labelledby="chart-heading">
+            <div class="panel-heading panel-heading-row">
+                <div>
+                    <h2 id="chart-heading">Histórico da cotação</h2>
+                    <p id="chartPairLabel">USD → BRL</p>
+                </div>
+                <div class="chart-range" role="group" aria-label="Período do gráfico">
+                    <button type="button" class="range-btn is-active" data-range="1">1D</button>
+                    <button type="button" class="range-btn" data-range="7">7D</button>
+                    <button type="button" class="range-btn" data-range="30">30D</button>
+                    <button type="button" class="range-btn" data-range="90">90D</button>
+                </div>
+            </div>
+            <div class="chart-card">
+                <canvas id="rateChart" height="220" aria-label="Gráfico da evolução da cotação" role="img"></canvas>
+                <p class="chart-note">Este gráfico é construído com pontos reais coletados durante o uso do aplicativo — a ExchangeRate API gratuita não oferece dados históricos. Quanto mais você consultar cotações, mais completo o histórico fica. Nenhum valor é estimado ou inventado.</p>
+            </div>
+        </section>
+
+        <!-- CONVERSÕES RÁPIDAS -->
+        <section class="panel" aria-labelledby="quick-heading">
+            <div class="panel-heading panel-heading-row">
+                <div>
+                    <h2 id="quick-heading">Conversões rápidas</h2>
+                    <p>Valores comuns já convertidos para a moeda de destino selecionada.</p>
+                </div>
+                <label class="quick-currency-label" for="quickCurrency">
+                    Converter para
+                    <select id="quickCurrency" aria-label="Moeda das conversões rápidas">
+                        <option value="USD" selected>USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                        <option value="JPY">JPY</option>
+                        <option value="ARS">ARS</option>
+                    </select>
+                </label>
+            </div>
+            <div class="quick-grid" id="quickGrid">
+                <p class="panel-placeholder">Converta uma vez para habilitar as conversões rápidas.</p>
+            </div>
+        </section>
+
+        <!-- FAVORITAS -->
+        <section class="panel" aria-labelledby="favorites-heading">
+            <div class="panel-heading">
+                <h2 id="favorites-heading">Moedas favoritas</h2>
+                <p>Marque moedas para acessá-las rapidamente. Suas escolhas ficam salvas neste navegador.</p>
+            </div>
+            <ul class="favorites-list" id="favoritesList"></ul>
+        </section>
+
+        <!-- HISTÓRICO -->
+        <section class="panel" aria-labelledby="history-heading">
+            <div class="panel-heading panel-heading-row">
+                <div>
+                    <h2 id="history-heading">Histórico de conversões</h2>
+                    <p>As últimas 10 conversões realizadas neste navegador.</p>
+                </div>
+                <button type="button" class="clear-btn" id="clearHistoryBtn">Limpar histórico</button>
+            </div>
+            <ul class="history-list" id="historyList">
+                <li class="panel-placeholder">Nenhuma conversão realizada ainda.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Dados fornecidos por <a href="https://www.exchangerate-api.com/" target="_blank" rel="noopener">ExchangeRate API</a></p>
+        <p>Desenvolvido por João Mateus</p>
+    </footer>
+
+    <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 
 </html>
