@@ -199,9 +199,17 @@ button {
     transform: translateY(-1px);
 }
 
-.icon-sun { display: none; }
-[data-theme="light"] .icon-sun { display: block; }
-[data-theme="light"] .icon-moon { display: none; }
+.icon-sun {
+    display: none;
+}
+
+[data-theme="light"] .icon-sun {
+    display: block;
+}
+
+[data-theme="light"] .icon-moon {
+    display: none;
+}
 
 /* ==========================================================================
    Layout / Hero
@@ -266,7 +274,7 @@ main {
 }
 
 .field-group label,
-.currency-panel > label {
+.currency-panel>label {
     display: block;
     font-size: 0.82rem;
     color: var(--text-muted);
@@ -364,7 +372,7 @@ main {
     padding: 10px 10px;
     appearance: none;
     cursor: pointer;
-    
+
 }
 
 .currency-select-wrap select:focus {
@@ -384,12 +392,12 @@ main {
 
 .currency-name {
     .currency-name {
-    margin-top: 6px;
-    font-size: 0.76rem;
-    color: var(--text-faint);
-    padding-left: 2px;
-    line-height: 1.4;
-}
+        margin-top: 6px;
+        font-size: 0.76rem;
+        color: var(--text-faint);
+        padding-left: 2px;
+        line-height: 1.4;
+    }
 }
 
 .swap-btn {
@@ -483,8 +491,13 @@ main {
 }
 
 @keyframes shimmer {
-    0% { background-position: 100% 0; }
-    100% { background-position: 0 0; }
+    0% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
 }
 
 .loading p {
@@ -526,13 +539,25 @@ main {
 }
 
 @keyframes result-in {
-    from { opacity: 0; transform: translateY(10px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .result-from {
@@ -916,12 +941,22 @@ main {
 }
 
 @keyframes toast-in {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes toast-out {
-    to { opacity: 0; transform: translateY(6px); }
+    to {
+        opacity: 0;
+        transform: translateY(6px);
+    }
 }
 
 /* ==========================================================================
@@ -932,7 +967,18 @@ main {
    Responsive - Mobile e navegadores internos de aplicativos
    ========================================================================== */
 
+
 @media (max-width: 768px) {
+
+}
+
+
+
+
+
+
+
+@media (max-width: 1068px) {
 
     .header-inner {
         padding: 14px 18px;
