@@ -928,7 +928,12 @@ main {
    Responsive
    ========================================================================== */
 
-@media (max-width: 640px) {
+/* ==========================================================================
+   Responsive - Mobile e navegadores internos de aplicativos
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
     .header-inner {
         padding: 14px 18px;
     }
@@ -951,10 +956,47 @@ main {
         border-radius: var(--radius-md);
     }
 
+    /* ============================================================
+       PAINÉIS DE MOEDA
+       ============================================================ */
+
     .currency-panels {
         grid-template-columns: 1fr;
         gap: 14px;
+        width: 100%;
+        min-width: 0;
     }
+
+    .currency-panel {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .currency-select-wrap {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .currency-select-wrap select {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .currency-name {
+        max-width: 100%;
+        min-width: 0;
+        line-height: 1.4;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    /* ============================================================
+       BOTÃO DE TROCA
+       ============================================================ */
 
     .swap-btn {
         justify-self: center;
@@ -966,51 +1008,15 @@ main {
         transform: rotate(270deg);
     }
 
+    /* ============================================================
+       RESULTADO
+       ============================================================ */
+
     .result-to {
         font-size: 1.6rem;
     }
 
     .panel-heading-row {
         align-items: flex-start;
-    }
-
-    .currency-panel {
-    min-width: 0;
-    width: 100%;
-}
-
-.currency-select-wrap {
-    width: 100%;
-    min-width: 0;
-}
-
-.currency-select-wrap select {
-    min-width: 0;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.currency-name {
-    max-width: 100%;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-}
-
-@media (max-width: 380px) {
-    .converter-btn {
-        width: 100%;
-    }
-
-    #amount {
-        font-size: 1.35rem;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.001ms !important;
-        transition-duration: 0.001ms !important;
     }
 }
